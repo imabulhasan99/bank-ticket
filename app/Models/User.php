@@ -54,4 +54,14 @@ class User extends Authenticatable
             $user->last_login = now();
         });
     }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
+    }
+
+    public function ticket()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
