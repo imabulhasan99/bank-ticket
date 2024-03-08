@@ -9,6 +9,30 @@ use Illuminate\Support\Facades\Route;
 
 class UserService
 {
+    public static function index()
+    {
+        try {
+            $user = auth()->user();
+            switch ($user->role) {
+                case 'manager':
+                    $user = User::with(['tickets', 'branch'])->where(function ($query) use ($user) {
+                        $query->where('branch_id', $user->branch_id);
+                    })->get();
+
+                    return response()->json(['user' => $user]);
+                    break;
+                case 'itdesk':
+                    $user = User::with(['tickets', 'branch'])->get();
+
+                    return response()->json(['user' => $user]);
+                    break;
+                default:
+                    break;
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
+    }
     public static function registerUser(Request $request)
     {
         $userInfo = $request->validated();
