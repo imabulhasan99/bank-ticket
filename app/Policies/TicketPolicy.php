@@ -2,25 +2,25 @@
 
 namespace App\Policies;
 
-use App\Models\Category;
+use App\Models\Ticket;
 use App\Models\User;
 
-class CategoryPolicy
+class TicketPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Category $category): bool
+    public function view(User $user, Ticket $ticket): bool
     {
-        return true;
+        return $user->id === $ticket->created_by || $user->role === 'manager' || $user->role === 'itdesk';
     }
 
     /**
@@ -28,21 +28,21 @@ class CategoryPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === 'itdesk';
+        return $user->role === 'manager' || $user->role === 'user';
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user): bool
+    public function update(User $user, Ticket $ticket): bool
     {
-        return $user->role === 'itdesk';
+        return $user->id === $ticket->created_by || $user->role === 'manager' || $user->role === 'itdesk';
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user): bool
+    public function delete(User $user, Ticket $ticket): bool
     {
         return $user->role === 'itdesk';
     }
@@ -50,7 +50,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Category $category): bool
+    public function restore(User $user, Ticket $ticket): bool
     {
         //
     }
@@ -58,7 +58,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Category $category): bool
+    public function forceDelete(User $user, Ticket $ticket): bool
     {
         //
     }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->foreignId('branch_id')->constrained('branches')->cascadeOnDelete(); 
+            $table->foreignId('branch_id')->constrained('branches')->cascadeOnDelete();
             $table->enum('role', ['manager', 'itdesk', 'user'])->default('user');
             $table->string('status')->default('active');
             $table->datetime('last_login');

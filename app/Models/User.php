@@ -60,7 +60,7 @@ class User extends Authenticatable
         return $this->belongsTo(Branch::class);
     }
 
-    public function ticket()
+    public function tickets()
     {
         return $this->hasMany(Ticket::class);
     }

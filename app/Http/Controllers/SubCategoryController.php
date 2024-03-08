@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubCategoryRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
-use Illuminate\Http\Request;
-use App\Http\Requests\SubCategoryRequest;
 
 class SubCategoryController extends Controller
 {
@@ -15,18 +14,21 @@ class SubCategoryController extends Controller
         $subCategoryData = $request->validated();
         try {
             $category = SubCategory::create($subCategoryData);
-            return response()->json(['message' => $category->title . 'Created successfully']);
+
+            return response()->json(['message' => $category->title.'Created successfully']);
         } catch (\Exception $e) {
-            return response()->json(['message'=> $e->getMessage()]);
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
+
     public function update(int $id, SubCategoryRequest $request)
     {
         $this->authorize('update', Category::class);
         try {
-            $category = SubCategory::findOrFail($id); 
+            $category = SubCategory::findOrFail($id);
             $category->update($request->validated());
-            return response()->json(['message' => $category->title . ' updated'], 200);
+
+            return response()->json(['message' => $category->title.' updated'], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -37,7 +39,8 @@ class SubCategoryController extends Controller
         $this->authorize('delete', Category::class);
         try {
             $category = SubCategory::findOrFail($id);
-            $category->delete(); 
+            $category->delete();
+
             return response()->json(['message' => 'Category deleted successfully'], 200);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

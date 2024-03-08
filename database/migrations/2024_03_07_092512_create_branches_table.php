@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('branches', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('routing');
-            $table->string('status');
+            $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });
     }

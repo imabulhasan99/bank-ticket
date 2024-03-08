@@ -9,14 +9,15 @@ class Branch extends Model
 {
     use HasFactory;
 
+    protected $table = 'branches';
+    protected $fillable = ['name','address','routing','status'];
     public function user()
     {
-        return $this->HasMany(User::class);
+        return $this->hasMany(User::class);
     }
+
     public function ticket()
     {
         return $this->hasMany(Ticket::class);
     }
 }
-
-

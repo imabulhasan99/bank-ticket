@@ -28,6 +28,7 @@ class UserService
         $user = User::create($userInfo);
         try {
             $token = $user->createToken('auth_token')->plainTextToken;
+
             return response()->json(['token' => $token], 201);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
@@ -39,6 +40,7 @@ class UserService
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $token = $user->createToken('auth_token')->plainTextToken;
+
             return response()->json(['message' => 'Login Successful', 'token' => $token], 200);
         } else {
             return response()->json(['error' => 'Invalid credentials'], 401);

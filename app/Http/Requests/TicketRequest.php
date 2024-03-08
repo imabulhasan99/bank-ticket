@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SubCategoryRequest extends FormRequest
+class TicketRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,13 @@ class SubCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'status' => ['nullable', 'string', 'max:100'],
+            'subject' => ['required', 'string', 'max:255'],
+            'branch_id' => ['required', 'integer', 'min:1'],
             'category_id' => ['required', 'integer', 'min:1'],
+            'sub_category_id' => ['required', 'integer', 'min:1'],
+            'details' => ['required', 'string', 'min:1'],
+            'created_by' => ['required', 'integer', 'min:1'],
+            'solved_by' => ['required', 'integer', 'min:1'],
         ];
     }
 }
