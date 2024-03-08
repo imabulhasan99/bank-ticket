@@ -73,13 +73,16 @@
 }
 </pre>
 
-## Endpoint: /login
+<h2>Endpoint: /login</h2>
 <p style="font-weight:bold">Method: POST</p>
-Description:
-This endpoint is used for user login.
-Request Body Parameters:
-email: (Required) The email address of the user. It must be a valid email format with a maximum length of 255 characters.
-password: (Required) The password of the user. It must be a string with a minimum length of 3 characters.
+<p>Description:</p>
+<p>This endpoint is used for user login.</p>
+<p>Request Body Parameters:</p>
+<ul>
+    <li>email: (Required) The email address of the user. It must be a valid email format with a maximum length of 255 characters.</li>
+    <li>password: (Required) The password of the user. It must be a string with a minimum length of 3 characters.</li>
+</ul>
+
 <h4>Example Request:</h4>
 <pre>
 {
@@ -102,14 +105,17 @@ password: (Required) The password of the user. It must be a string with a minimu
 }
 </pre>
 
-## Endpoint: /branch/create
+<h2>Endpoint: /branch/create</h2>
 <p style="font-weight:bold">Method: POST</p>
-Description:
-This endpoint is used to create a new branch.
-Request Body Parameters:
-name: (Required) The name of the branch. It must be a string with a maximum length of 255 characters and must be unique among existing branch names.
-address: (Optional) The address of the branch. It must be a string with a maximum length of 255 characters.
-routing: (Required) The routing number of the branch. It must be an integer.
+<p>Description:</p>
+<p>This endpoint is used to create a new branch.</p>
+<p>Request Body Parameters:</p>
+<ul>
+    <li>name: (Required) The name of the branch. It must be a string with a maximum length of 255 characters and must be unique among existing branch names.</li>
+    <li>address: (Optional) The address of the branch. It must be a string with a maximum length of 255 characters.</li>
+    <li>routing: (Required) The routing number of the branch. It must be an integer.</li>
+</ul>
+
 <h4>Example Request:</h4>
 <pre>
 {
@@ -132,10 +138,10 @@ routing: (Required) The routing number of the branch. It must be an integer.
 }
 </pre>
 
-## Endpoint: /branch/list
-Method: GET
-Description:
-This endpoint is used to retrieve a list of all branches along with their associated users and tickets.
+<h2>Endpoint: /branch/list</h2>
+<p>Method: GET</p>
+<p>Description:</p>
+<p>This endpoint is used to retrieve a list of all branches along with their associated users and tickets.</p>
 
 <h4>Example Response:</h4>
 <p style="bold">Success (200 OK):</p>
@@ -202,17 +208,21 @@ This endpoint is used to retrieve a list of all branches along with their associ
 }
 </pre>
 
-## Endpoint: /branch/update/{id}
+<h2>Endpoint: /branch/update/{id}</h2>
 <p style="font-weight:bold">Method: POST</p>
-Description:
-This endpoint is used to update an existing branch with the specified ID.
+<p>Description:</p>
+<p>This endpoint is used to update an existing branch with the specified ID.</p>
+<p>Path Parameters:</p>
+<ul>
+    <li>id: (Required) The ID of the branch to be updated.</li>
+</ul>
+<p>Request Body Parameters:</p>
+<ul>
+    <li>name: (Optional) The updated name of the branch. It must be a string with a maximum length of 255 characters and must be unique among existing branch names.</li>
+    <li>address: (Optional) The updated address of the branch. It must be a string with a maximum length of 255 characters.</li>
+    <li>routing: (Optional) The updated routing number of the branch. It must be an integer.</li>
+</ul>
 
-Path Parameters:
-id: (Required) The ID of the branch to be updated.
-Request Body Parameters:
-name: (Optional) The updated name of the branch. It must be a string with a maximum length of 255 characters and must be unique among existing branch names.
-address: (Optional) The updated address of the branch. It must be a string with a maximum length of 255 characters.
-routing: (Optional) The updated routing number of the branch. It must be an integer.
 <h4>Example Request:</h4>
 <pre>
 {
@@ -235,13 +245,15 @@ routing: (Optional) The updated routing number of the branch. It must be an inte
 }
 </pre>
 
-## Endpoint: /branch/delete/{id}
+<h2>Endpoint: /branch/delete/{id}</h2>
 <p style="font-weight:bold">Method: POST</p>
-Description:
-This endpoint is used to delete an existing branch with the specified ID.
+<p>Description:</p>
+<p>This endpoint is used to delete an existing branch with the specified ID.</p>
+<p>Path Parameters:</p>
+<ul>
+    <li>id: (Required) The ID of the branch to be deleted.</li>
+</ul>
 
-Path Parameters:
-id: (Required) The ID of the branch to be deleted.
 <h4>Example Response:</h4>
 <p style="bold">Success (200 OK):</p>
 <pre>
