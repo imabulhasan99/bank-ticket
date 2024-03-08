@@ -46,7 +46,7 @@
     <li>name: (Required) The name of the user. It must be a string with a maximum length of 255 characters.</li>
     <li>email: (Required) The email address of the user. It must be a valid email format and unique in the users table, with a maximum length of 255 characters.</li>
     <li>password: (Required) The password of the user. It must be a string with a minimum length of 3 characters.</li>
-    <li>branch_id: (Required) The ID of the branch the user belongs to. It must be an integer with a minimum value of 1.</li>
+    <li>branch_id: (optional) The ID of the branch the user belongs to. It must be an integer with a minimum value of 1.</li>
     <li>mobile: (Optional) The mobile number of the user. It must be an integer.</li>
 </ul>
 <h4>Example Request:</h4>
@@ -265,5 +265,146 @@
 <pre>
 {
     "error": "Error message describing the issue"
+}
+</pre>
+
+<h2>Endpoint: /user/list </h2>
+<p>Method: GET</p>
+<p>Description:</p>
+<p>This endpoint is used to retrieve a list of users based on their roles.</p>
+
+<p>Request Body Parameters:</p>
+
+<h4>Example Response:</h4>
+<p style="bold">Success (200 OK):</p>
+<pre>
+{
+    "user": [
+        {
+            "id": 1,
+            "name": "User 1",
+            "email": "user1@example.com",
+            "role": "manager",
+            "created_at": "2022-03-25T12:00:00Z",
+            "updated_at": "2022-03-25T12:00:00Z",
+            "tickets": [
+                {
+                    "id": 1,
+                    "subject": "Ticket 1",
+                    "details": "Details of Ticket 1",
+                    "status": "in_progress",
+                    "created_at": "2022-03-25T12:00:00Z",
+                    "updated_at": "2022-03-25T12:00:00Z"
+                },
+                {
+                    "id": 2,
+                    "subject": "Ticket 2",
+                    "details": "Details of Ticket 2",
+                    "status": "approved",
+                    "created_at": "2022-03-25T12:00:00Z",
+                    "updated_at": "2022-03-25T12:00:00Z"
+                }
+            ],
+            "branch": {
+                "id": 1,
+                "name": "Branch 1",
+                "address": "Address 1",
+                "routing": 123456789,
+                "created_at": "2022-03-25T12:00:00Z",
+                "updated_at": "2022-03-25T12:00:00Z"
+            }
+        },
+        {
+            "id": 2,
+            "name": "User 2",
+            "email": "user2@example.com",
+            "role": "itdesk",
+            "created_at": "2022-03-25T12:00:00Z",
+            "updated_at": "2022-03-25T12:00:00Z",
+            "tickets": [],
+            "branch": null
+        }
+    ]
+}
+
+</pre>
+<p style="bold">Error (4xx, 5xx):</p>
+<pre>
+{
+    "error": "Error message describing the issue"
+}
+</pre>
+
+<h2>Endpoint: /category/create</h2>
+<p style="font-weight:bold">Method: POST</p>
+<p>Description:</p>
+<p>This endpoint is used to create a new category.</p>
+<p>Request Body Parameters:</p>
+<ul>
+    <li>title: (Required) The title of the category. It must be a string with a maximum length of 255 characters.</li>
+</ul>
+<h4>Example Request:</h4>
+<pre>
+{
+    "title": "New Category"
+}
+</pre>
+<h4>Example Response:</h4>
+<p style="bold">Success (200 OK):</p>
+<pre>
+{
+    "message": "New Category Created successfully"
+}
+</pre>
+<p style="bold">Error (4xx, 5xx):</p>
+<pre>
+{
+    "message": "Error message describing the issue"
+}
+</pre>
+
+<h2>Endpoint: /category/list</h2>
+<p>Method: GET</p>
+<p>Description:</p>
+<p>This endpoint is used to retrieve a list of all categories along with their associated subcategories.</p>
+<h4>Example Response:</h4>
+<p style="bold">Success (200 OK):Returns a JSON array containing information about all categories and their associated subcategories.</p>
+<pre>
+[
+    {
+        "id": 1,
+        "title": "Category 1",
+        "created_at": "2022-03-25T12:00:00Z",
+        "updated_at": "2022-03-25T12:00:00Z",
+        "subcategories": [
+            {
+                "id": 1,
+                "title": "Subcategory 1",
+                "category_id": 1,
+                "created_at": "2022-03-25T12:00:00Z",
+                "updated_at": "2022-03-25T12:00:00Z"
+            },
+            {
+                "id": 2,
+                "title": "Subcategory 2",
+                "category_id": 1,
+                "created_at": "2022-03-25T12:00:00Z",
+                "updated_at": "2022-03-25T12:00:00Z"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Category 2",
+        "created_at": "2022-03-25T12:00:00Z",
+        "updated_at": "2022-03-25T12:00:00Z",
+        "subcategories": []
+    }
+]
+</pre>
+<p style="bold">Error (4xx, 5xx):</p>
+<pre>
+{
+    "error": "You are not authorized to view categories."
 }
 </pre>
