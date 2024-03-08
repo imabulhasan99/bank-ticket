@@ -37,14 +37,18 @@
 
 ## Endpoint: user/register, manager/register, or itdesk/register
 <p style="font-weight:bold">Method: POST</p>
-Description:
-- This endpoint is used to register a new user, manager, or IT desk user.
-Request Body Parameters:
-- name: (Required) The name of the user. It must be a string with a maximum length of 255 characters.
-- email: (Required) The email address of the user. It must be a valid email format and unique in the users table, with a maximum length of 255 characters.
-- password: (Required) The password of the user. It must be a string with a minimum length of 3 characters.
-- branch_id: (Required) The ID of the branch the user belongs to. It must be an integer with a minimum value of 1.
-- mobile: (Optional) The mobile number of the user. It must be an integer.
+<p>Description:</p>
+<ul>
+    <li>This endpoint is used to register a new user, manager, or IT desk user.</li>
+</ul>
+<p>Request Body Parameters:</p>
+<ul>
+    <li>name: (Required) The name of the user. It must be a string with a maximum length of 255 characters.</li>
+    <li>email: (Required) The email address of the user. It must be a valid email format and unique in the users table, with a maximum length of 255 characters.</li>
+    <li>password: (Required) The password of the user. It must be a string with a minimum length of 3 characters.</li>
+    <li>branch_id: (Required) The ID of the branch the user belongs to. It must be an integer with a minimum value of 1.</li>
+    <li>mobile: (Optional) The mobile number of the user. It must be an integer.</li>
+</ul>
 <h4>Example Request:</h4>
 <pre>
 {
