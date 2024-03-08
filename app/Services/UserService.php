@@ -70,4 +70,14 @@ class UserService
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
     }
+
+    public static function logout($request)
+    {
+        try {
+            $request->user()->currentAccessToken()->delete();
+            return response()->json(['message' =>'Logout successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

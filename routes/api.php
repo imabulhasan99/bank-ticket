@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('user')->middleware('auth:sanctum')->group(function () {
     Route::get('list', [AuthController::class, 'index'])->name('user.list');
+    Route::post('logout', [AuthController::class,'logout'])->name('user.logout');
 });
 
 Route::middleware('guest:sanctum')->group(function () {
