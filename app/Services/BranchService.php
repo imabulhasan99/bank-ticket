@@ -8,8 +8,12 @@ class BranchService
 {
     public static function index()
     {
-        $branch = Branch::with(['users', 'ticket'])->get();
-        return response()->json($branch);
+        try {
+            $branch = Branch::with(['users', 'ticket'])->get();
+            return response()->json($branch);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
     }
     public static function create(array $branchData)
     {

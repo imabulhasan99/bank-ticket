@@ -27,7 +27,6 @@ class RegisterRequest extends FormRequest
             'password' => ['required', 'string', 'min:3'],
             'branch_id' => ['required', 'integer', 'min:1'],
             'mobile' => ['nullable', 'integer'],
-
         ];
     }
 }

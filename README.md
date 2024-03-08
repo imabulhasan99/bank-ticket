@@ -1,66 +1,253 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center">Bank Support Ticket API</p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## All Endpoints
+1. Authentication Endpoints:
+- [POST] /user/register
+- [POST] /manager/register
+- [POST] /itdesk/register
+- [POST] /login
+- [POST] /logout 
 
-## About Laravel
+2. Branch Endpoints:
+- [POST] /branch/create
+- [GET] /branch/list
+- [POST] /branch/update/{id}
+- [POST] /branch/delete/{id}
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+3. User Endpoints:
+- [GET] /user/list
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+4. Category Endpoints:
+- [POST] /category/create
+- [GET] /category/list
+- [POST] /category/update/{id}
+- [POST] /category/delete/{id}
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+5. Subcategory Endpoints:
+- [POST] /subcategory/create
+- [POST] /subcategory/update/{id}
+- [POST] /subcategory/delete/{id}
 
-## Learning Laravel
+6. Ticket Endpoints:
+- [POST] /ticket/create
+- [GET] /ticket/list
+- [POST] /ticket/update/{id}
+- [POST] /ticket/delete/{id}
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Endpoint: user/register, manager/register, or itdesk/register
+Method: POST
+Description:
+This endpoint is used to register a new user, manager, or IT desk user.
+Request Body Parameters:
+name: (Required) The name of the user. It must be a string with a maximum length of 255 characters.
+email: (Required) The email address of the user. It must be a valid email format and unique in the users table, with a maximum length of 255 characters.
+password: (Required) The password of the user. It must be a string with a minimum length of 3 characters.
+branch_id: (Required) The ID of the branch the user belongs to. It must be an integer with a minimum value of 1.
+mobile: (Optional) The mobile number of the user. It must be an integer.
+<h4>Example Request:</h4>
+<pre>
+{
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "password": "secretpassword",
+    "branch_id": 1,
+    "mobile": 1234567890
+}
+</pre>
+<h4>Example Response:</h4>
+<p style="bold">Success (200 OK):</p>
+<pre>
+{
+    "message": "This is your auth token"
+}
+</pre>
+<p style="bold">Error (4xx, 5xx):</p>
+<pre>
+{
+    "error": "Error message describing the issue."
+}
+</pre>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Endpoint: /login
+Method: POST
+Description:
+This endpoint is used for user login.
+Request Body Parameters:
+email: (Required) The email address of the user. It must be a valid email format with a maximum length of 255 characters.
+password: (Required) The password of the user. It must be a string with a minimum length of 3 characters.
+<h4>Example Request:</h4>
+<pre>
+{
+    "email": "johndoe@example.com",
+    "password": "secretpassword"
+}
+</pre>
+<h4>Example Response:</h4>
+<p style="bold">Success (200 OK):</p>
+<pre>
+{
+    "message": "Login Successful",
+    "token": "generated_token_here"
+}
+</pre>
+<p style="bold">Error (4xx, 5xx):</p>
+<pre>
+{
+    "error": "Invalid credentials"
+}
+</pre>
 
-## Laravel Sponsors
+## Endpoint: /branch/create
+Method: POST
+Description:
+This endpoint is used to create a new branch.
+Request Body Parameters:
+name: (Required) The name of the branch. It must be a string with a maximum length of 255 characters and must be unique among existing branch names.
+address: (Optional) The address of the branch. It must be a string with a maximum length of 255 characters.
+routing: (Required) The routing number of the branch. It must be an integer.
+<h4>Example Request:</h4>
+<pre>
+{
+    "name": "Branch Name",
+    "address": "Branch Address",
+    "routing": 123456789
+}
+</pre>
+<h4>Example Response:</h4>
+<p style="bold">Success (200 OK):</p>
+<pre>
+{
+    "message": "Branch Name branch created successfully"
+}
+</pre>
+<p style="bold">Error (4xx, 5xx):</p>
+<pre>
+{
+    "error": "Error message describing the issue"
+}
+</pre>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Endpoint: /branch/list
+Method: GET
+Description:
+This endpoint is used to retrieve a list of all branches along with their associated users and tickets.
 
-### Premium Partners
+<h4>Example Response:</h4>
+<p style="bold">Success (200 OK):</p>
+<pre>
+[
+    {
+        "id": 1,
+        "name": "Branch 1",
+        "address": "Address 1",
+        "routing": 123456789,
+        "created_at": "2022-03-25T12:00:00Z",
+        "updated_at": "2022-03-25T12:00:00Z",
+        "users": [
+            {
+                "id": 1,
+                "name": "User 1",
+                "email": "user1@example.com",
+                "created_at": "2022-03-25T12:00:00Z",
+                "updated_at": "2022-03-25T12:00:00Z"
+            },
+            {
+                "id": 2,
+                "name": "User 2",
+                "email": "user2@example.com",
+                "created_at": "2022-03-25T12:00:00Z",
+                "updated_at": "2022-03-25T12:00:00Z"
+            }
+        ],
+        "ticket": [
+            {
+                "id": 1,
+                "subject": "Ticket 1",
+                "details": "Details of Ticket 1",
+                "status": "in_progress",
+                "created_at": "2022-03-25T12:00:00Z",
+                "updated_at": "2022-03-25T12:00:00Z"
+            },
+            {
+                "id": 2,
+                "subject": "Ticket 2",
+                "details": "Details of Ticket 2",
+                "status": "approved",
+                "created_at": "2022-03-25T12:00:00Z",
+                "updated_at": "2022-03-25T12:00:00Z"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Branch 2",
+        "address": "Address 2",
+        "routing": 987654321,
+        "created_at": "2022-03-25T12:00:00Z",
+        "updated_at": "2022-03-25T12:00:00Z",
+        "users": [],
+        "ticket": []
+    }
+]
+</pre>
+<p style="bold">Error (4xx, 5xx):</p>
+<pre>
+{
+    "error": "Error message describing the issue"
+}
+</pre>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Endpoint: /branch/update/{id}
+Method: POST
+Description:
+This endpoint is used to update an existing branch with the specified ID.
 
-## Contributing
+Path Parameters:
+id: (Required) The ID of the branch to be updated.
+Request Body Parameters:
+name: (Optional) The updated name of the branch. It must be a string with a maximum length of 255 characters and must be unique among existing branch names.
+address: (Optional) The updated address of the branch. It must be a string with a maximum length of 255 characters.
+routing: (Optional) The updated routing number of the branch. It must be an integer.
+<h4>Example Request:</h4>
+<pre>
+{
+    "name": "Updated Branch Name",
+    "address": "Updated Branch Address",
+    "routing": 987654321
+}
+</pre>
+<h4>Example Response:</h4>
+<p style="bold">Success (200 OK):</p>
+<pre>
+{
+    "message": "Updated Branch Name updated"
+}
+</pre>
+<p style="bold">Error (4xx, 5xx):</p>
+<pre>
+{
+    "error": "Error message describing the issue"
+}
+</pre>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Endpoint: /branch/delete/{id}
+Method: POST
+Description:
+This endpoint is used to delete an existing branch with the specified ID.
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Path Parameters:
+id: (Required) The ID of the branch to be deleted.
+<h4>Example Response:</h4>
+<p style="bold">Success (200 OK):</p>
+<pre>
+{
+    "message": "Branch Name deleted"
+}
+</pre>
+<p style="bold">Error (4xx, 5xx):</p>
+<pre>
+{
+    "error": "Error message describing the issue"
+}
+</pre>
