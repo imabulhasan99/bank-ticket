@@ -36,7 +36,7 @@
 
 
 ## Endpoint: user/register, manager/register, or itdesk/register
-Method: POST
+<p>Method: POST</p>
 Description:
 This endpoint is used to register a new user, manager, or IT desk user.
 Request Body Parameters:
@@ -70,7 +70,7 @@ mobile: (Optional) The mobile number of the user. It must be an integer.
 </pre>
 
 ## Endpoint: /login
-Method: POST
+<p>Method: POST</p>
 Description:
 This endpoint is used for user login.
 Request Body Parameters:
@@ -99,7 +99,7 @@ password: (Required) The password of the user. It must be a string with a minimu
 </pre>
 
 ## Endpoint: /branch/create
-Method: POST
+<p>Method: POST</p>
 Description:
 This endpoint is used to create a new branch.
 Request Body Parameters:
@@ -199,7 +199,7 @@ This endpoint is used to retrieve a list of all branches along with their associ
 </pre>
 
 ## Endpoint: /branch/update/{id}
-Method: POST
+<p>Method: POST</p>
 Description:
 This endpoint is used to update an existing branch with the specified ID.
 
@@ -232,7 +232,7 @@ routing: (Optional) The updated routing number of the branch. It must be an inte
 </pre>
 
 ## Endpoint: /branch/delete/{id}
-Method: POST
+<p>Method: POST</p>
 Description:
 This endpoint is used to delete an existing branch with the specified ID.
 
