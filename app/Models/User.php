@@ -62,6 +62,11 @@ class User extends Authenticatable
 
     public function tickets()
     {
-        return $this->hasMany(Ticket::class);
+        return $this->hasMany(Ticket::class, 'created_by');
+    }
+
+    public function solveBy()
+    {
+        return $this->hasMany(Ticket::class, 'solved_by');
     }
 }

@@ -10,8 +10,10 @@ class Branch extends Model
     use HasFactory;
 
     protected $table = 'branches';
-    protected $fillable = ['name','address','routing','status'];
-    public function user()
+
+    protected $fillable = ['name', 'address', 'routing', 'status'];
+
+    public function users()
     {
         return $this->hasMany(User::class);
     }

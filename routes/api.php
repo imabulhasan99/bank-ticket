@@ -1,21 +1,22 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\TicketController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('user')->middleware('auth:sanctum')->group(function () {
+    Route::get('list', [AuthController::class, 'index'])->name('user.list');
 });
 
-Route::post('user/register', [AuthController::class, 'register'])->name('user.register');
-Route::post('manager/register', [AuthController::class, 'register'])->name('manager.register');
-Route::post('itdesk/register', [AuthController::class, 'register'])->name('itdesk.register');
-Route::post('login', [AuthController::class, 'login'])->name('login');
-
+Route::middleware('guest:sanctum')->group(function () {
+    Route::post('user/register', [AuthController::class, 'register'])->name('user.register');
+    Route::post('manager/register', [AuthController::class, 'register'])->name('manager.register');
+    Route::post('itdesk/register', [AuthController::class, 'register'])->name('itdesk.register');
+    Route::post('login', [AuthController::class, 'login'])->name('login');
+});
 Route::prefix('category')->middleware('auth:sanctum')->group(function () {
     Route::post('create', [CategoryController::class, 'create'])->name('category.create');
     Route::get('list', [CategoryController::class, 'index'])->name('category.index');
@@ -34,4 +35,11 @@ Route::prefix('ticket')->middleware('auth:sanctum')->group(function () {
     Route::get('list', [TicketController::class, 'index']);
     Route::post('update/{id}', [TicketController::class, 'update'])->name('ticket.update');
     Route::post('delete/{id}', [SubCategoryController::class, 'delete'])->name('category.delete');
+});
+
+Route::prefix('branch')->middleware('auth:sanctum')->group(function () {
+    Route::post('create', [BranchController::class, 'create'])->name('branch.create');
+    Route::get('list', [BranchController::class, 'index']);
+    Route::post('update/{id}', [BranchController::class, 'update'])->name('ticket.update');
+    Route::post('delete/{id}', [BranchController::class, 'delete'])->name('category.delete');
 });

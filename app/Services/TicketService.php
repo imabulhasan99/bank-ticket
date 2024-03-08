@@ -11,7 +11,7 @@ class TicketService
         $user = auth()->user();
         switch ($user->role) {
             case 'manager':
-                $tickets = Ticket::with('userticket','branch')->where(function ($query) use ($user) {
+                $tickets = Ticket::with('userticket', 'branch')->where(function ($query) use ($user) {
                     $query->whereIn('status', ['in_progress', 'approved'])
                         ->where('branch_id', $user->branch_id);
                 })->get();
@@ -20,11 +20,11 @@ class TicketService
                 break;
             case 'user':
                 $tickets = Ticket::where('created_by', $user->id)->get();
-                
+
                 return response()->json(['tickets' => $tickets]);
                 break;
             default:
-                $tickets = Ticket::with('user','branch')->get();
+                $tickets = Ticket::with('user', 'branch')->get();
 
                 return response()->json(['tickets' => $tickets]);
                 break;
