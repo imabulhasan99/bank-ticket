@@ -12,7 +12,7 @@ class TicketService
         switch ($user->role) {
             case 'manager':
                 $tickets = Ticket::with('userticket', 'branch')->where(function ($query) use ($user) {
-                    $query->whereIn('status', ['in_progress', 'approved'])
+                    $query->whereIn('status', ['in_progress', 'approved','reject'])
                         ->where('branch_id', $user->branch_id);
                 })->get();
 
@@ -23,10 +23,20 @@ class TicketService
 
                 return response()->json(['tickets' => $tickets]);
                 break;
-            default:
-                $tickets = Ticket::with('user', 'branch')->get();
+                     case 'user':
+                $tickets = Ticket::where('created_by', $user->id)->get();
 
                 return response()->json(['tickets' => $tickets]);
+                break;
+                case 'itdesk':
+                    $tickets = Ticket::with('userticket', 'branch')->where(function ($query) use ($user) {
+                        $query->whereIn('status', ['approved']);
+                    })->get();
+    
+                    return response()->json(['tickets' => $tickets]);
+                    break;
+            default:
+               
                 break;
         }
     }
@@ -46,6 +56,7 @@ class TicketService
     {
         try {
             $ticket = Ticket::findOrFail($id);
+            //Some Validation needed
             $ticket->update($request->validated());
 
             return response()->json(['message' => $ticket->subject.' updated successfully'], 201);

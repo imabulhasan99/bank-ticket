@@ -1,4 +1,46 @@
 <p align="center">Bank Support Ticket API</p>
+<h2>How to Run This Project</h2>
+
+<ol>
+    <li><b>Clone the Repository:</b> Open your terminal (command prompt) and navigate to the directory where you want to store the project. Run the following command to clone the repository:</li>
+</ol>
+
+<pre><code>git clone &lt;repository_url&gt;</code></pre>
+
+<ol start="2">
+    <li><b>Install Dependencies:</b> Navigate into the project directory and install Composer dependencies:</li>
+</ol>
+
+<pre><code>cd &lt;project_directory&gt;
+composer install</code></pre>
+
+<ol start="3">
+    <li><b>Set Up Environment:</b> Create a copy of the <code>.env.example</code> file and rename it to <code>.env</code>. Update the database connection settings in the <code>.env</code> file to match your local environment.</li>
+</ol>
+
+<pre><code>cp .env.example .env</code></pre>
+
+<ol start="4">
+    <li><b>Generate Application Key:</b> Generate a new application key for your Laravel project:</li>
+</ol>
+
+<pre><code>php artisan key:generate</code></pre>
+
+<ol start="5">
+    <li><b>Run Migrations and Seeders:</b> Run database migrations and seeders to create database tables and seed initial data:</li>
+</ol>
+
+<pre><code>php artisan migrate --seed</code></pre>
+
+<ol start="6">
+    <li><b>Serve the Application:</b> Start the Laravel development server to serve your application locally:</li>
+</ol>
+
+<pre><code>php artisan serve</code></pre>
+
+<p>After database seeding it will create a demo branch called Branch 1. Later you can delete it</p>
+<p>Now, your Laravel project should be running locally, and you can access it in your web browser.</p>
+
 
 ## All Endpoints
 1. Authentication Endpoints:

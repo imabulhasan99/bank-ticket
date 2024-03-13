@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('branch_id')->constrained('branches')->cascadeOnDelete()->nullable();
             $table->enum('role', ['manager', 'itdesk', 'user'])->default('user');
             $table->string('status')->default('active');
-            $table->datetime('last_login');
+            $table->datetime('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
