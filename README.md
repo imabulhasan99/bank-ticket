@@ -5,7 +5,7 @@
     <li><b>Clone the Repository:</b> Open your terminal (command prompt) and navigate to the directory where you want to store the project. Run the following command to clone the repository:</li>
 </ol>
 
-<pre><code>git clone &lt;https://github.com/imabulhasan99/bank-ticket.git&gt;</code></pre>
+<pre><code>git clone https://github.com/imabulhasan99/bank-ticket.git</code></pre>
 
 <ol start="2">
     <li><b>Install Dependencies:</b> Navigate into the project directory and install Composer dependencies:</li>
