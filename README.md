@@ -11,7 +11,7 @@
     <li><b>Install Dependencies:</b> Navigate into the project directory and install Composer dependencies:</li>
 </ol>
 
-<pre><code>cd &lt;bank-ticket&gt;
+<pre><code>cd bank-ticket;
 composer install</code></pre>
 
 <ol start="3">
